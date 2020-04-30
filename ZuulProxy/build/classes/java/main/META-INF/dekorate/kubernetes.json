@@ -1,0 +1,46 @@
+{
+  "apiVersion" : "apps/v1",
+  "kind" : "Deployment",
+  "metadata" : {
+    "labels" : {
+      "app" : "ZuulProxy",
+      "version" : "0.0.1-SNAPSHOT",
+      "group" : "dell"
+    },
+    "name" : "ZuulProxy"
+  },
+  "spec" : {
+    "replicas" : 1,
+    "selector" : {
+      "matchLabels" : {
+        "app" : "ZuulProxy",
+        "version" : "0.0.1-SNAPSHOT",
+        "group" : "dell"
+      }
+    },
+    "template" : {
+      "metadata" : {
+        "labels" : {
+          "app" : "ZuulProxy",
+          "version" : "0.0.1-SNAPSHOT",
+          "group" : "dell"
+        }
+      },
+      "spec" : {
+        "containers" : [ {
+          "env" : [ {
+            "name" : "KUBERNETES_NAMESPACE",
+            "valueFrom" : {
+              "fieldRef" : {
+                "fieldPath" : "metadata.namespace"
+              }
+            }
+          } ],
+          "image" : "dell/ZuulProxy:0.0.1-SNAPSHOT",
+          "imagePullPolicy" : "IfNotPresent",
+          "name" : "ZuulProxy"
+        } ]
+      }
+    }
+  }
+}

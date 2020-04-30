@@ -1,0 +1,26 @@
+server:
+  port: 8182
+spring:
+  application:
+    name: client-service
+  datasource:
+    url: jdbc:mysql://18.188.209.130:3306/parkingdb?useSSL=false&allowPublicKeyRetrieval=true
+    password: root
+    username: root
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  cloud:
+    kubernetes:
+      enabled: true
+      discovery:
+        all-namespaces: true
+dekorate:
+  kubernetes:
+    serviceType: "NodePort"
